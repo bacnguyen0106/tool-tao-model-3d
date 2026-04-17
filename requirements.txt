@@ -1,0 +1,6 @@
+numpy
+pyvista
+opencv-python-headless
+Pillow
+transformers
+torch
