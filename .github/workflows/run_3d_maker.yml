@@ -1,0 +1,38 @@
+name: Tao Model 3D Tu Anh
+
+# Thiết lập để bạn có thể bấm chạy thủ công (nút Run workflow)
+on:
+  workflow_dispatch:
+
+jobs:
+  build_3d_model:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Thiết lập Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+
+    - name: Cài đặt thư viện hệ thống (Màn hình ảo cho 3D)
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y xvfb libgl1-mesa-glx
+
+    - name: Cài đặt thư viện Python
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Chạy Script Tạo 3D
+      # Dùng xvfb-run để giả lập màn hình cho pyvista
+      run: xvfb-run python image_to_3d_lite.py
+
+    - name: Upload File 3D (.ply) cho người dùng tải về
+      uses: actions/upload-artifact@v4
+      with:
+        name: My_3D_Proxy_Model
+        path: sofa_proxy_sieu_nhe.ply
