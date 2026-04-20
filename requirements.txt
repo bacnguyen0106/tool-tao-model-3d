@@ -1,6 +1,9 @@
-numpy
-pyvista
-opencv-python-headless
-Pillow
+gradio
+gradio_client
+ultralytics
 transformers
 torch
+torchvision
+Pillow
+opencv-python-headless
+python-dotenv
